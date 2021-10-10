@@ -149,10 +149,11 @@ def getvlandict(filetextblockline):
 
 
 if __name__ == '__main__':
-
+    configpath = r'E:\20210907_河西政务网网络设备配置信息'
+    anaylispath = r'E:\20210914_河西政务网网络分析'
     curr_time = datetime.datetime.now()
     time_str = datetime.datetime.strftime(curr_time,'%Y-%m-%d_%H-%M-%S')
-    filename = r'vlan-configration' + '_' + time_str + '.csv'
+    filename = r'vlaninterface-configration' + '_' + time_str + '.csv'
     filefullname = anaylispath + '\\' + filename
     
     os.chdir(configpath)
@@ -168,7 +169,7 @@ if __name__ == '__main__':
     for f in txtfilelist:
         fileslist.append(configpath + '\\' + f)
 
-    allvlanconfig = list()
+    allvlainterfaceconfig = list()
     for f in fileslist:
         print(f)
         templist = list()
@@ -177,10 +178,55 @@ if __name__ == '__main__':
         ftxtb = makefiletextblock(ftxt)
         dlocal,dtype = getfilelocalandtype(ftxt)
         vlanifd = getvlandict(ftxtb)
-        print(vlanifd)
+        #print(vlanifd)
 
+        templist.append(tuple(['devicelocation',dlocal]))
+        templist.append(tuple(['devicetype',dtype]))
+        tempdict = dict(templist)
+        tempdict.update(vlanifd)
 
+        allvlainterfaceconfig.append(copy.deepcopy(tempdict))
 
+    attset = set()
+    for f in allvlainterfaceconfig:
+        for i in f['vlaninterface']:
+            for att in list(f[i].keys()):
+                attset.add(att)
+    print(attset)
+
+    csvline = list()
+    csvheadlist = ['devicelocation','devicetype','vlaninterface']
+    attlist = list(attset)
+    attlist.sort()
+    for att in attlist:
+        csvheadlist.append(att)
+    csvhead = tuple(csvheadlist)
+    print(csvhead)
+
+    for vifd in allvlainterfaceconfig:
+        vlaninterfacelist = vifd['vlaninterface']
+        for vinterf in vlaninterfacelist:
+            tempviflist = list()
+            for v in csvheadlist:
+                if vifd.get(v) != None and v != 'vlaninterface':
+                    tempviflist.append(vifd[v])
+                elif v == 'vlaninterface':
+                        tempviflist.append(vinterf)
+                elif vifd[vinterf].get(v) != None:
+                        tempviflist.append(vifd[vinterf][v])
+                else:
+                    tempviflist.append('')
+            csvline.append(tuple(tempviflist))
+    
+    #for line in csvline:
+    #    print(line)
+    
+    filew = codecs.open(filefullname,'w','utf-8')
+    wf = csv.writer(filew)
+    wf.writerow(csvhead)
+    for l in csvline:
+        wf.writerow(l)
+    filew.close()
 
 
     #print("+-----------All of files in <{}> was scan, {} files. Interface physic port infomation is {}, write to file <{}>.-----------+".format(configpath,len(fileslist),len(csvline),filefullname))
