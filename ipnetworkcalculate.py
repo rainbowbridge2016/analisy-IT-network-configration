@@ -9,7 +9,7 @@ import csv
 import codecs
 import IPy
 
-filer = open(r'E:\20210914_河西政务网网络分析\Report_ip_networksegment.csv','r')
+filer = open(r'....please type youself dot csv file....','r')
 rf = csv.reader(filer)
 recoder = list()
 for i in rf:
