@@ -229,4 +229,4 @@ if __name__ == '__main__':
     filew.close()
 
 
-    #print("+-----------All of files in <{}> was scan, {} files. Interface physic port infomation is {}, write to file <{}>.-----------+".format(configpath,len(fileslist),len(csvline),filefullname))
+    print("+-----------All of files in <{}> was scan, {} files. vlanInterface infomation is {}, write to file <{}>.-----------+".format(configpath,len(fileslist),len(csvline),filefullname))
