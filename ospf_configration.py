@@ -149,7 +149,8 @@ def getospfdict(filetextblockline):
 
 
 if __name__ == '__main__':
-
+    configpath = r'....pleas type youself file dirctory....'
+    anaylispath =r'....pleas type youself file dirctory....'
     curr_time = datetime.datetime.now()
     time_str = datetime.datetime.strftime(curr_time,'%Y-%m-%d_%H-%M-%S')
     filename = r'ospf-configration' + '_' + time_str + '.csv'
