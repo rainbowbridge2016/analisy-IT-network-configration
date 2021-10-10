@@ -153,7 +153,7 @@ if __name__ == '__main__':
     anaylispath =r'....pleas type youself file dirctory....'
     curr_time = datetime.datetime.now()
     time_str = datetime.datetime.strftime(curr_time,'%Y-%m-%d_%H-%M-%S')
-    filename = r'ospf-configration' + '_' + time_str + '.csv'
+    filename = r'ospf-configuration' + '_' + time_str + '.csv'
     filefullname = anaylispath + '\\' + filename
     
     os.chdir(configpath)
