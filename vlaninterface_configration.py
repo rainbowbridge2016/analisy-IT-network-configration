@@ -149,8 +149,8 @@ def getvlandict(filetextblockline):
 
 
 if __name__ == '__main__':
-    configpath = r'E:\20210907_河西政务网网络设备配置信息'
-    anaylispath = r'E:\20210914_河西政务网网络分析'
+    configpath = r'....pleas type youself file dirctory....'
+    anaylispath =r'....pleas type youself file dirctory....'
     curr_time = datetime.datetime.now()
     time_str = datetime.datetime.strftime(curr_time,'%Y-%m-%d_%H-%M-%S')
     filename = r'vlaninterface-configration' + '_' + time_str + '.csv'
