@@ -23,7 +23,7 @@ for r in recoder:
     q = str(IPy.IP(r[location+1]).make_net(r[location+2]))
     r.append(q)
 
-filew = codecs.open(r'E:\20210914_河西政务网网络分析\Report_ip_networksegment_net_utf8.csv','w','utf-8')
+filew = codecs.open(r'....please type youself dot csv file....','w','utf-8')
 wf = csv.writer(filew)
 wf.writerow(title)
 for n in recoder:
